@@ -36,6 +36,7 @@ store = {
 
 lamps_cost = store[goods['Лампа']][0]['quantity'] * store[goods['Лампа']][0]['price']
 # или проще (/сложнее ?)
+
 lamp_code = goods['Лампа']
 lamps_item = store[lamp_code][0]
 lamps_quantity = lamps_item['quantity']
