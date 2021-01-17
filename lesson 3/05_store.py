@@ -46,10 +46,15 @@ store = {
 #         подсчет стоимости товара
 #     вывод на консоль количества и стоимости товара на складе
 
-# TODO здесь ваш код
+key_list = list(goods.keys())
+val_list = list(goods.values())
 
-
-
-
-
-
+for item in goods:
+    i = 0
+    quantity_item, cost_item = 0, 0
+    while i < len(store[goods[item]]):
+        quantity_item += store[goods[item]][i]['quantity']
+        price_item = store[goods[item]][i]['price']
+        cost_item += price_item * store[goods[item]][i]['quantity']
+        i += 1
+    print(key_list[val_list.index(goods[item])], ' -', quantity_item, 'шт, стоимость', cost_item, 'руб')
