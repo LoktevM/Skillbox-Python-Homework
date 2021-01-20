@@ -26,16 +26,43 @@ import simple_draw as sd
 
 # можно поиграть -шрифтами- цветами и углами отклонения
 
-# TODO здесь ваш код
+point_0 = sd.get_point(300, 5)
 
-# 4) Усложненное задание (делать по желанию)
-# - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
-# - сделать рандомное отклонение длины ветвей в пределах 20% от коэффициента 0.75
-# Возможный результат решения см lesson_004/results/exercise_04_fractal_02.jpg
+angle_0 = 90
+length_0 = 100
+delta = 30
 
-# Пригодятся функции
-# sd.random_number()
+next_angle = angle_0
+next_length = length_0
+next_point = point_0
+
+
+def branch(point, angle, length):
+    if length < 2:
+        return
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=1)
+    v1.draw()
+    next_point = v1.end_point
+
+    next_angle = angle+30*(1+sd.random_number(-40,40)/100)
+    next_length = length * .75*(1+sd.random_number(-20,20)/100)
+    branch(point=next_point, angle=next_angle, length=next_length)
+
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=1)
+    v1.draw()
+    next_point = v1.end_point
+    next_angle = angle - 30*(1+sd.random_number(-40,40)/100)
+    next_length = length * .75*(1+sd.random_number(-20,20)/100)
+    branch(point=next_point, angle=next_angle, length=next_length)
+
+branch(point=point_0, angle=90, length=100)
+
+    # 4) Усложненное задание (делать по желанию)
+    # - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
+    # - сделать рандомное отклонение длины ветвей в пределах 20% от коэффициента 0.75
+    # Возможный результат решения см lesson_004/results/exercise_04_fractal_02.jpg
+
+    # Пригодятся функции
+    # sd.random_number()
 
 sd.pause()
-
-
