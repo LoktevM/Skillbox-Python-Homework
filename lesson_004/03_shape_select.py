@@ -9,7 +9,6 @@ import simple_draw as sd
 # Код функций из упр lesson_004/02_global_color.py скопировать сюда
 # Результат решения см lesson_004/results/exercise_03_shape_select.jpg
 
-# TODO здесь ваш код
 def draw_shape(point, angle, count_sides, length, color):
     v_first = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
     sd.line(v_first.start_point, v_first.end_point, color=color, width=3)
