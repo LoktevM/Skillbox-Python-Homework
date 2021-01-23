@@ -7,25 +7,15 @@ x_resolution = 620
 y_resolution = 600
 sd.resolution = (x_resolution, y_resolution)
 
-hight_brick = 10
-wight_brick = 30
+hight_brick = 50
+wight_brick = 100
 count_bricks_in_wight = x_resolution // wight_brick + 1
 count_bricks_in_hight = y_resolution // hight_brick
 
-
-# Нарисовать стену из кирпичей. Размер кирпича - 100х50
-# Использовать вложенные циклы for
-
-
 def draw_brick(point):
-    point_1 = point
-    point_2 = sd.get_point(point_1.x + wight_brick, point_1.y)
-    point_3 = sd.get_point(point_2.x, point_2.y + hight_brick)
-    point_4 = sd.get_point(point_3.x - wight_brick, point_3.y)
-    sd.line(start_point=point_1, end_point=point_2, color=sd.COLOR_ORANGE, width=3)
-    sd.line(start_point=point_2, end_point=point_3, color=sd.COLOR_ORANGE, width=3)
-    sd.line(start_point=point_3, end_point=point_4, color=sd.COLOR_ORANGE, width=3)
-    sd.line(start_point=point_4, end_point=point_1, color=sd.COLOR_ORANGE, width=3)
+    left_bottom = point
+    right_top= sd.get_point(left_bottom.x + wight_brick, left_bottom.y+hight_brick)
+    sd.rectangle(left_bottom=left_bottom,right_top=right_top,  width=1)
 
 for j in range(count_bricks_in_hight):
     for i in range(count_bricks_in_wight):
