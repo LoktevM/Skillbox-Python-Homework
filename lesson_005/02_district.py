@@ -13,6 +13,7 @@ from district.soviet_street.house1.room1 import folks as people_of_ss_h1_r1
 from district.soviet_street.house1.room2 import folks
 from district.soviet_street.house2 import room1
 
+
 razdelitel = ', '
 people = []
 
