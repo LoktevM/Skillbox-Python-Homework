@@ -1,5 +1,24 @@
 # -*- coding: utf-8 -*-
+from termcolor import colored,cprint
+from mastermind_engine import create_number, check_number,is_gameover
 
+game_number = create_number()
+is_game=1
+# cprint('Компьютер загадал число:{}'.format(game_number),color='green')
+while is_game==1:
+    game_number = create_number()
+    while True:
+        user_number = input(colored('Введите ваше 4-ех значное число с неповторяющимися знаками?', color='green'))
+        print(check_number(user_number))
+        if is_gameover():
+            break
+
+    cprint('Вы отгадали это число:{}'.format(game_number),color='blue')
+    cprint('Хотите сыграть еше?',color='green')
+    cprint('0 - НЕТ',color='red')
+    cprint('1 - ДА',color='green')
+    is_game=int(input()
+cprint('Конец игры', color='red')
 # Игра «Быки и коровы»
 # https://goo.gl/Go2mb9
 #
@@ -42,5 +61,3 @@
 # Движок игры реализует только саму функциональность игры.
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
-
-# TODO здесь ваш код...
