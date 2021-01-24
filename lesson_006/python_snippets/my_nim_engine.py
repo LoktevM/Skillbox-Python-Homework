@@ -1,5 +1,7 @@
 from random import randint
 
+
+
 _holder = []
 
 def put_stoned():
