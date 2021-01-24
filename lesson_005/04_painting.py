@@ -1,4 +1,23 @@
 # -*- coding: utf-8 -*-
+from elements_for_paining.house import draw_house
+from rainbow import draw_rainbow,draw_sun
+from snowfall import draw_snowfalls
+
+import simple_draw as sd
+sd.resolution = (1200, 600)
+
+first_point = sd.get_point(400, 0)
+draw_house(first_point=first_point, hight_house=300, wight_house =305)
+
+center_point_rainbow = sd.get_point(1100, 0)
+draw_rainbow(point=center_point_rainbow, radius=300)
+
+center_point_sun = sd.get_point(800, 500)
+draw_sun(center_point_sun,50)
+
+draw_snowfalls(0, 300,50)
+
+sd.pause()
 
 # Создать пакет, в который скопировать функции отрисовки из предыдущего урока
 #  - радуги
@@ -18,7 +37,7 @@
 # пример см. lesson_005/results/04_painting.jpg
 # Приправить своей фантазией по вкусу (коты? коровы? люди? трактор? что придумается)
 
-# TODO здесь ваш код
+
 
 # Усложненное задание (делать по желанию)
 # Анимировать картину.

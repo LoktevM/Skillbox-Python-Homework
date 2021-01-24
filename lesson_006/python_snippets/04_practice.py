@@ -21,7 +21,6 @@
 #  вывод расположения камней
 #  ввод вторым игроком хода - позицию и кол-во камней
 #  вывод расположения камней
-
 from my_nim_engine import take_from_bunch, get_bunches, put_stoned, is_gameover
 from termcolor import cprint,colored
 put_stoned()
