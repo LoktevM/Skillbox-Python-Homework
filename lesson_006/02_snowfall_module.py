@@ -4,7 +4,7 @@ import simple_draw as sd
 from snowfall import create_snowflakes, draw_snowflakes, move_snowflakes, get_numbers_fallen_snowflakes, \
     delete_snowflakes
 
-count_sl = 40
+count_sl = 100
 create_snowflakes(count_snowflakes=count_sl)
 
 while True:
@@ -27,7 +27,6 @@ while True:
 
 sd.pause()
 
-# На основе кода из lesson_004/05_snowfall.py
 # сделать модуль snowfall.py в котором реализовать следующие функции
 #  создать_снежинки(N) - создает N снежинок
 #  нарисовать_снежинки_цветом(color) - отрисовывает все снежинки цветом color
