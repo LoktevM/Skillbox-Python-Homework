@@ -5,6 +5,7 @@ from mastermind_engine import create_number, check_number,is_gameover
 game_number = create_number()
 is_game=1
 # cprint('Компьютер загадал число:{}'.format(game_number),color='green')
+cprint('Компьютер загадал число! Попробуйте его отгадать',color='green')
 while is_game==1:
     game_number = create_number()
     while True:
@@ -17,7 +18,7 @@ while is_game==1:
     cprint('Хотите сыграть еше?',color='green')
     cprint('0 - НЕТ',color='red')
     cprint('1 - ДА',color='green')
-    is_game=int(input()
+    is_game=int(input())
 cprint('Конец игры', color='red')
 # Игра «Быки и коровы»
 # https://goo.gl/Go2mb9

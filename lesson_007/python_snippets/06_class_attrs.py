@@ -87,5 +87,5 @@ print('Lemming.names', Lemming.names)
 print('Lemming.names_count', Lemming.names_count)
 print('Lemming.some_text', Lemming.some_text)
 print('Lemming.some_var', Lemming.some_var)
-new_lemming.check_class_attrs()
+# new_lemming.check_class_attrs()
 

@@ -74,31 +74,6 @@ my_backpack.inspect()
 # __str__ - вызывается при преобразовании объекта к строке str(obj)
 # например print(my_backpack)
 
-class Backpack:
-    """ Рюкзак """
-
-    def __init__(self, gift=None):
-        self.content = []
-        if gift:
-            self.content.append(gift)
-
-    def add(self, item):
-        """ Положить в рюкзак """
-        self.content.append(item)
-        print("В рюкзак положили:", item)
-
-    def __str__(self):
-        return 'Backpack: ' + ', '.join(self.content)
-
-
-my_backpack = Backpack(gift='телефон')
-my_backpack.add(item='ноутбук')
-my_backpack.add(item='зарядка для ноутбука')
-print(str(my_backpack))
-
-
-# print(my_backpack)
-# print(my_backpack.__str__())
 
 # аналогичные методы
 # __len__ - вызывается для получения "размера" объекта с помощью функции len()
