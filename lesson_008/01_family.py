@@ -3,6 +3,14 @@
 from termcolor import cprint
 from random import randint
 
+# Все они живут в одном доме, дом характеризуется:
+#   кол-во денег в тумбочке (в начале - 100)
+#   кол-во еды в холодильнике (в начале - 50)
+#   кол-во грязи (в начале - 0)
+#
+# У людей есть имя, степень сытости (в начале - 30) и степень счастья (в начале - 100).
+#
+
 ######################################################## Часть первая
 #
 # Создать модель жизни небольшой семьи.
@@ -20,13 +28,6 @@ from random import randint
 #   покупать шубу,
 #   убираться в доме,
 
-# Все они живут в одном доме, дом характеризуется:
-#   кол-во денег в тумбочке (в начале - 100)
-#   кол-во еды в холодильнике (в начале - 50)
-#   кол-во грязи (в начале - 0)
-#
-# У людей есть имя, степень сытости (в начале - 30) и степень счастья (в начале - 100).
-#
 # Любое действие, кроме "есть", приводит к уменьшению степени сытости на 10 пунктов
 # Кушают взрослые максимум по 30 единиц еды, степень сытости растет на 1 пункт за 1 пункт еды.
 # Степень сытости не должна падать ниже 0, иначе чел умрет от голода.
@@ -41,17 +42,23 @@ from random import randint
 #
 # Подвести итоги жизни за год: сколько было заработано денег, сколько сьедено еды, сколько куплено шуб.
 
-
 class House:
 
     def __init__(self):
-        pass
+        self.food = 50
+        self.money = 100
+        self.mud = 0
 
-
+    def __str__(self):
+        return 'В доме еды осталось {}, денег осталось {}, грязь {}'.format(
+            self.food, self.money,self.mud )
 class Husband:
 
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.name = name
+        self.fullness = 30
+        self.happiness = 100
+        # self.house = None
 
     def __str__(self):
         return super().__str__()
@@ -71,7 +78,8 @@ class Husband:
 
 class Wife:
 
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         pass
 
     def __str__(self):
@@ -104,6 +112,7 @@ for day in range(365):
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
     cprint(home, color='cyan')
+
 
 # TODO после реализации первой части - отдать на проверку учителю
 
@@ -189,23 +198,22 @@ class Child:
 # отправить на проверку учителем.
 
 
-home = House()
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
-kolya = Child(name='Коля')
-murzik = Cat(name='Мурзик')
-
-for day in range(365):
-    cprint('================== День {} =================='.format(day), color='red')
-    serge.act()
-    masha.act()
-    kolya.act()
-    murzik.act()
-    cprint(serge, color='cyan')
-    cprint(masha, color='cyan')
-    cprint(kolya, color='cyan')
-    cprint(murzik, color='cyan')
-
+# home = House()
+# serge = Husband(name='Сережа')
+# masha = Wife(name='Маша')
+# kolya = Child(name='Коля')
+# murzik = Cat(name='Мурзик')
+#
+# for day in range(365):
+#     cprint('================== День {} =================='.format(day), color='red')
+#     serge.act()
+#     masha.act()
+#     kolya.act()
+#     murzik.act()
+#     cprint(serge, color='cyan')
+#     cprint(masha, color='cyan')
+#     cprint(kolya, color='cyan')
+#     cprint(murzik, color='cyan')
 
 # Усложненное задание (делать по желанию)
 #
@@ -228,4 +236,3 @@ for day in range(365):
 #       for salary in range(50, 401, 50):
 #           max_cats = life.experiment(salary)
 #           print(f'При зарплате {salary} максимально можно прокормить {max_cats} котов')
-
