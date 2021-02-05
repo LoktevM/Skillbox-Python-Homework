@@ -51,7 +51,7 @@ class Chatterer:
             for char, count in char_stat.items():
                 self.totals[sequence] += count
                 self.stat_for_generate[sequence].append([count, char])
-                self.stat_for_generate[sequence].sort(reverse=True)
+                self.s[sequence].sort(reverse=True)
 
     def chat(self, N, out_file_name=None):
         N = 1000
