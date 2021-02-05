@@ -54,14 +54,20 @@ class Stats_of_text:
 
     def sorting(self):
         if self.stat:
-            sorted_values=sorted(self.stat.values(), reverse=True)
+            # sorted_values=sorted(self.stat.values(), reverse=False)
+            # self.sorted_stats = {}
+            # for i in sorted_values:
+            #     for k in self.stat.keys():
+            #         if self.stat[k] == i:
+            #             self.sorted_stats[k] = self.stat[k]
+            #             break
+            sorted_values=sorted(self.stat.keys(), reverse=True)
             self.sorted_stats = {}
             for i in sorted_values:
                 for k in self.stat.keys():
-                    if self.stat[k] == i:
+                    if k == i:
                         self.sorted_stats[k] = self.stat[k]
                         break
-
             self.stat = self.sorted_stats
 
     def print_stat(self):
