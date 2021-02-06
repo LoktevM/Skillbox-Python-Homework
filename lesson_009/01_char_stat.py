@@ -22,7 +22,6 @@
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 
 import zipfile
-from pprint import pprint
 
 
 # zip_file_name = 'voyna-i-mir.txt.zip'
@@ -31,7 +30,6 @@ from pprint import pprint
 #     zfile.extract(file_name)
 
 class Stats_of_text:
-
     def __init__(self, file_name):
         self.file_name = file_name
         self.stat = {}
