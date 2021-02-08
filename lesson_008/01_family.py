@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from termcolor import cprint
 from random import randint
+
+from termcolor import cprint
 
 
 # Все они живут в одном доме, дом характеризуется:
@@ -205,6 +206,22 @@ class Wife(Man):
         self.house.mud -= clean_level
         cprint('{} убрала {} грязи'.format(self.name, clean_level), color='green')
 
+class Cat:
+
+    def __init__(self):
+        pass
+
+    def act(self):
+        pass
+
+    def eat(self):
+        pass
+
+    def sleep(self):
+        pass
+
+    def soil(self):
+        pass
 
 home = House()
 serge = Husband(name='Сережа', house=home)
@@ -247,22 +264,6 @@ for day in range(365):
 # Если кот дерет обои, то грязи становится больше на 5 пунктов
 
 
-class Cat:
-
-    def __init__(self):
-        pass
-
-    def act(self):
-        pass
-
-    def eat(self):
-        pass
-
-    def sleep(self):
-        pass
-
-    def soil(self):
-        pass
 
 
 ######################################################## Часть вторая бис
