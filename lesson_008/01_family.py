@@ -91,13 +91,6 @@ class Man:
             else:
                 self.fullness -= 10
 
-    # def bool is_alive(self):
-    #     if self.fullness>=0 or self.happiness>=0:
-    #         return False
-    #     else:
-    #         return True
-
-
 class Husband(Man):
 
     def __init__(self, name, house):
@@ -127,8 +120,8 @@ class Husband(Man):
 
     def work(self):
         self.fullness -= 10
-        self.house.money += 30
-        cprint('{} поработал и заработал 30 рублей'.format(self.name), color='green')
+        self.house.money += 150
+        cprint('{} поработал и заработал 150 рублей'.format(self.name), color='green')
 
     def gaming(self):
         cprint('{} поиграл в танки'.format(self.name), color='green')
@@ -177,10 +170,10 @@ class Wife(Man):
 
     def shopping(self):
         self.fullness -= 10
-        if self.house.money >= 30:
-            self.house.food += 30
-            self.house.money -= 30
-            cprint('{} купила 30 грамм еды'.format(self.name), color='green')
+        if self.house.money >= 40:
+            self.house.food += 40
+            self.house.money -= 40
+            cprint('{} купила 40 грамм еды'.format(self.name), color='green')
         elif self.house.money >= 10:
             self.house.food += 10
             self.house.money -= 10
@@ -206,35 +199,61 @@ class Wife(Man):
         self.house.mud -= clean_level
         cprint('{} убрала {} грязи'.format(self.name, clean_level), color='green')
 
-class Child:
+class Child(Man):
 
-    def __init__(self):
-        pass
+    def __init__(self, name, house):
+        super().__init__(name=name, house=house)
+        self.happiness=100
 
     def __str__(self):
-        return super().__str__()
+        return 'Ребенок ' + super().__str__()
 
     def act(self):
-        pass
+        if self.isalive:
+            if self.fullness <= 10:
+                self.eat()
+            else:
+                self.sleep()
+
+            if self.fullness <= 0:
+                cprint('{} умер от голода...'.format(self.name), color='red')
+                self.isalive = False
 
     def eat(self):
-        pass
+        if self.house.food > 0:
+            if self.house.food < 10:
+                food_portion = self.house.food
+            else:
+                food_portion = 10
+            self.fullness += food_portion
+            self.house.food -= food_portion
+            cprint('{} покушал(а), порция составила {} грамм!'.format(self.name, food_portion), color='green')
+        else:
+            cprint('В доме нет еды!', color='red')
+            if self.fullness < 10:
+                self.fullness -= self.fullness
+            else:
+                self.fullness -= 10
 
     def sleep(self):
-        pass
+        cprint('{} поспал'.format(self.name), color='green')
+        self.fullness -= 10
 
 
 home = House()
 serge = Husband(name='Сережа', house=home)
 masha = Wife(name='Маша', house=home)
+alesha = Child(name='Алеша', house=home)
 
 for day in range(365):
     cprint('================== День {} =================='.format(day), color='red')
     serge.act()
     masha.act()
+    alesha.act()
     home.day_pass()
     cprint(serge, color='cyan')
     cprint(masha, color='cyan')
+    cprint(alesha, color='cyan')
     cprint(home, color='cyan')
 
 ######################################################## Часть вторая бис
@@ -247,10 +266,6 @@ for day in range(365):
 #
 # отличия от взрослых - кушает максимум 10 единиц еды,
 # степень счастья  - не меняется, всегда ==100 ;)
-
-
-
-
 
 
 ######################################################## Часть третья
