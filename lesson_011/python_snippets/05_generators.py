@@ -100,6 +100,7 @@ for x, y, result in get_next_result(list_1, list_2):
 
 # Есть еще одна возможность у генераторов - они могут принимать значения
 #
+
 # Создадим генератор очереди
 def queue(*args):
     data = list(args)
@@ -109,7 +110,6 @@ def queue(*args):
         # обратите внимание, что yield возвращает значение и скобки
         if new_value is not None:
             data.append(new_value)
-
 
 shop_queue = queue('Вася', 'Марина', 'Владислав', 'Эльвира')
 for name in shop_queue:

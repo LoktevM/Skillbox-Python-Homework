@@ -36,8 +36,7 @@ class Family:
 
 my_family = Family()
 print(my_family)
-for value in my_family:
-    print(value)
+
 
 # То есть интерпретатор вызывает метод __next__ при каждом проходе цикла
 # а если в __next__ возникает исключение StopIteration - то значит в обьекте нет больше элементов
