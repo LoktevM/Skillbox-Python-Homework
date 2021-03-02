@@ -4,31 +4,57 @@
 # Есть функция генерации списка простых чисел
 
 
-def get_prime_numbers(n):
-    prime_numbers = []
-    for number in range(2, n+1):
-        for prime in prime_numbers:
-            if number % prime == 0:
-                break
-        else:
-            prime_numbers.append(number)
-    return prime_numbers
+# def get_prime_numbers(n):
+#     prime_numbers = []
+#     for number in range(2, n + 1):
+#         for prime in prime_numbers:
+#             if number % prime == 0:
+#                 break
+#         else:
+#             prime_numbers.append(number)
+#     return prime_numbers
+
 
 # Часть 1
 # На основе алгоритма get_prime_numbers создать класс итерируемых обьектов,
 # который выдает последовательность простых чисел до n
 #
 # Распечатать все простые числа до 10000 в столбик
+from pprint import pprint
 
 
 class PrimeNumbers:
-    pass
-    # TODO здесь ваш код
+    def __init__(self, n):
+        self.i, self.number, self.n = 0, 2, n
+        self.prime_numbers = []
+
+    def __iter__(self):
+        self.i = 0
+        self.number = 2
+        self.prime_numbers = [2]
+        return self
+
+    def __next__(self):
+        self.i += 1
+        if self.i > 1:
+            next_number = self.number + 1
+            while True:
+                for prime in self.prime_numbers:
+                    if next_number % prime == 0:
+                        break
+                else:
+                    self.prime_numbers.append(next_number)
+                    break
+                next_number = next_number + 1
+            self.number = next_number
+        if self.number > self.n:
+            raise StopIteration()
+        return self.number
 
 
-prime_number_iterator = PrimeNumbers(n=10000)
-for number in prime_number_iterator:
-    print(number)
+# prime_number_iterator = PrimeNumbers(n=10)
+# for number in prime_number_iterator:
+#     print(number)
 
 
 # TODO после подтверждения части 1 преподователем, можно делать
@@ -38,13 +64,38 @@ for number in prime_number_iterator:
 
 
 def prime_numbers_generator(n):
-    pass
-    # TODO здесь ваш код
+    prime_numbers = []
+    for number in range(2, n + 1):
+        for prime in prime_numbers:
+            if number % prime == 0:
+                break
+        else:
+            prime_numbers.append(number)
+            yield number
 
 
-for number in prime_numbers_generator(n=10000):
-    print(number)
+# for number in prime_numbers_generator(n=10000):
+#     print(number)
 
+def is_happy(number):
+    str_number = str(number)
+    sum_part_1, sum_part_2 = 0,0
+    for i in range(len(str_number) // 2):
+        sum_part_1 += int(str_number[i])
+        sum_part_2 += int(str_number[len(str_number) - i - 1])
+    if sum_part_1 is not sum_part_2:
+        return False
+    return True
+
+def is_palyndrom(number):
+    str_number = str(number)
+    for i in range(len(str_number) // 2):
+        if str_number[i] != str_number[len(str_number) - i - 1]:
+            return False
+    return True
+
+result = filter(is_happy, range(50000))
+pprint(list(result))
 
 # Часть 3
 # Написать несколько функций-фильтров, которые выдает True, если число:

@@ -72,8 +72,6 @@ class ParserLog:
         file_good_result.close()
         file_bad_result.close()
 
-    def write_result_time_period(self):
-        pass
 
 
 log_stat = ParserLog(filename='registrations.txt')
