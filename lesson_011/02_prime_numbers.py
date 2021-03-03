@@ -22,6 +22,24 @@
 # Распечатать все простые числа до 10000 в столбик
 from pprint import pprint
 
+def is_happy(number):
+    str_number = str(number)
+    sum_part_1, sum_part_2 = 0, 0
+    for i in range(len(str_number) // 2):
+        sum_part_1 += int(str_number[i])
+        sum_part_2 += int(str_number[len(str_number) - i - 1])
+    if sum_part_1 is not sum_part_2:
+        return False
+    return True
+
+
+def is_palyndrom(number):
+    str_number = str(number)
+    for i in range(len(str_number) // 2):
+        if str_number[i] != str_number[len(str_number) - i - 1]:
+            return False
+    return True
+
 
 class PrimeNumbers:
     def __init__(self, n):
@@ -52,15 +70,17 @@ class PrimeNumbers:
         return self.number
 
 
-# prime_number_iterator = PrimeNumbers(n=10)
-# for number in prime_number_iterator:
-#     print(number)
+prime_number_iterator = PrimeNumbers(1000)
+for number in prime_number_iterator:
+    print(number)
 
+result = filter(is_happy, prime_number_iterator)
+pprint(list(result))
 
-# TODO после подтверждения части 1 преподователем, можно делать
 # Часть 2
 # Теперь нужно создать генератор, который выдает последовательность простых чисел до n
 # Распечатать все простые числа до 10000 в столбик
+
 
 
 def prime_numbers_generator(n):
@@ -76,26 +96,11 @@ def prime_numbers_generator(n):
 
 # for number in prime_numbers_generator(n=10000):
 #     print(number)
+# result = filter(is_palyndrom, prime_numbers_generator(n=1000000))
+# pprint(list(result))
 
-def is_happy(number):
-    str_number = str(number)
-    sum_part_1, sum_part_2 = 0,0
-    for i in range(len(str_number) // 2):
-        sum_part_1 += int(str_number[i])
-        sum_part_2 += int(str_number[len(str_number) - i - 1])
-    if sum_part_1 is not sum_part_2:
-        return False
-    return True
-
-def is_palyndrom(number):
-    str_number = str(number)
-    for i in range(len(str_number) // 2):
-        if str_number[i] != str_number[len(str_number) - i - 1]:
-            return False
-    return True
-
-result = filter(is_happy, range(50000))
-pprint(list(result))
+# result = filter(is_happy, range(50000))
+# pprint(list(result))
 
 # Часть 3
 # Написать несколько функций-фильтров, которые выдает True, если число:
