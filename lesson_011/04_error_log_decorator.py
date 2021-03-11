@@ -9,8 +9,20 @@
 
 
 def log_errors(func):
-    pass
-    # TODO здесь ваш код
+    def surrogate(*args, **kwargs):
+        try:
+            result = func(*args, **kwargs)
+        except (ValueError, ZeroDivisionError) as exc:
+            file_result = open('function_errors.txt', mode='a', encoding='utf8')
+            if args:
+                line_error = args
+            else:
+                line_error = kwargs
+            file_result.write(func.__name__ + ' - ' + str(exc) + ' - ' + str(line_error) + '\n')
+        else:
+            return result
+
+    return surrogate
 
 
 # Проверить работу на следующих функциях
@@ -38,18 +50,15 @@ lines = [
     'Земфира 86',
     'Равшан wmsuuzsxi@mail.ru 35',
 ]
+file_result = open('function_errors.txt', mode='w', encoding='utf8')
 for line in lines:
-    try:
-        check_line(line)
-    except Exception as exc:
-        print(f'Invalid format: {exc}')
+    check_line(line)
 perky(param=42)
 
-
+file_result.close()
 # Усложненное задание (делать по желанию).
 # Написать декоратор с параметром - именем файла
 #
 # @log_errors('function_errors.log')
 # def func():
 #     pass
-
