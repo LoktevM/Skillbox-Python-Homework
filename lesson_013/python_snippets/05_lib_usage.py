@@ -5,6 +5,7 @@
 # Задача: сделать поздравительную открытку другу на Halloween
 
 import os
+
 from PIL import Image, ImageDraw, ImageFont, ImageColor
 
 
@@ -19,7 +20,7 @@ class PostCardMaker:
             self.font_path = font_path
 
     def make(self, resize=False, out_path=None):
-        im = Image.open(self.template)
+         im = Image.open(self.template)
         if resize:
             w, h = im.size
             im = im.resize((w // 2, h // 2))

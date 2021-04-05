@@ -65,12 +65,67 @@
 #
 # Для плавного перехода к мультипоточности, код оформить в обьектном стиле, используя следующий каркас
 #
-# class <Название класса>:
-#
-#     def __init__(self, <параметры>):
-#         <сохранение параметров>
-#
-#     def run(self):
-#         <обработка данных>
+import os
 
-# TODO написать код в однопоточном/однопроцессорном стиле
+
+class SecidAnalyzer:
+
+    def __init__(self, file_name, file_dir):
+        self.secid_name = None
+        self.file_name = file_name
+        self.file_dir = file_dir
+        self.volatility = 0
+
+    def run(self):
+        file_Secid = open(os.path.join(self.file_dir, self.file_name), mode='r', encoding='utf8')
+        count_line = 0
+
+        for line in file_Secid:
+            words_line = line.split(',')
+            if count_line == 1:
+                self.file_name = words_line[0]
+                curr_price = float(words_line[2])
+                min_price = curr_price
+                max_price = curr_price
+            if count_line > 1:
+                curr_price = float(words_line[2])
+                if curr_price < min_price:
+                    min_price = curr_price
+                if curr_price > max_price:
+                    max_price = curr_price
+            count_line += 1
+        average_price = (min_price + max_price) / 2
+        #   волатильность = ((максимальная цена - минимальная цена) / средняя цена) * 100%
+        self.volatility = ((max_price - min_price) / average_price) * 100
+        return self.volatility
+
+path_scan_folder = 'E:\Phyton my tests\Skillbox\Lessons\lesson_012\\trades'
+fileList = os.listdir(path_scan_folder)
+all_volatility = {}
+zero_volatility = []
+value_volatility = []
+for filename in fileList:
+    testSecid = SecidAnalyzer(file_name=filename, file_dir=path_scan_folder)
+    all_volatility.setdefault(filename, testSecid.run())
+all_volatility = sorted(all_volatility.items(), key=lambda x: x[1])
+
+for key, items in all_volatility:
+    curr_ticker = (key, items)
+    if items == 0:
+        zero_volatility.append(curr_ticker)
+    else:
+        value_volatility.append(curr_ticker)
+
+print("Максимальная волатильность:")
+print(value_volatility[-1][0] + ' - ' + str(round(value_volatility[-1][1],2)) + ' %')
+print(value_volatility[-2][0] + ' - ' + str(round(value_volatility[-2][1],2)) + ' %')
+print(value_volatility[-3][0] + ' - ' + str(round(value_volatility[-3][1],2)) + ' %')
+
+print("Минимальная волатильность:")
+print(value_volatility[2][0] + ' - ' + str(round(value_volatility[2][1],2)) + ' %')
+print(value_volatility[1][0] + ' - ' + str(round(value_volatility[1][1],2)) + ' %')
+print(value_volatility[0][0] + ' - ' + str(round(value_volatility[0][1],2)) + ' %')
+
+print("Нулевая волатильность:")
+for ticker in zero_volatility:
+    print(ticker[0], end=', ')
