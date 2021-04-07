@@ -67,13 +67,15 @@
 #
 import os
 
+from utils import time_track
+
 
 class SecidAnalyzer:
 
-    def __init__(self, file_name, file_dir):
+    def __init__(self, file_name):
         self.secid_name = None
         self.file_name = file_name
-        self.file_dir = file_dir
+        self.file_dir = 'E:\Phyton my tests\Skillbox\Lessons\lesson_012\\trades'
         self.volatility = 0
 
     def run(self):
@@ -99,33 +101,41 @@ class SecidAnalyzer:
         self.volatility = ((max_price - min_price) / average_price) * 100
         return self.volatility
 
-path_scan_folder = 'E:\Phyton my tests\Skillbox\Lessons\lesson_012\\trades'
-fileList = os.listdir(path_scan_folder)
-all_volatility = {}
-zero_volatility = []
-value_volatility = []
-for filename in fileList:
-    testSecid = SecidAnalyzer(file_name=filename, file_dir=path_scan_folder)
-    all_volatility.setdefault(filename, testSecid.run())
-all_volatility = sorted(all_volatility.items(), key=lambda x: x[1])
 
-for key, items in all_volatility:
-    curr_ticker = (key, items)
-    if items == 0:
-        zero_volatility.append(curr_ticker)
-    else:
-        value_volatility.append(curr_ticker)
+@time_track
+def main():
+    path_scan_folder = 'E:\Phyton my tests\Skillbox\Lessons\lesson_012\\trades'
+    fileList = os.listdir(path_scan_folder)
+    all_volatility = {}
+    zero_volatility = []
+    value_volatility = []
+    Secids = [SecidAnalyzer(file_name=filename) for filename in fileList]
+    for sedic in Secids:
+        all_volatility.setdefault(sedic.file_name, sedic.run())
+    all_volatility = sorted(all_volatility.items(), key=lambda x: x[1])
 
-print("Максимальная волатильность:")
-print(value_volatility[-1][0] + ' - ' + str(round(value_volatility[-1][1],2)) + ' %')
-print(value_volatility[-2][0] + ' - ' + str(round(value_volatility[-2][1],2)) + ' %')
-print(value_volatility[-3][0] + ' - ' + str(round(value_volatility[-3][1],2)) + ' %')
+    for key, items in all_volatility:
+        curr_ticker = (key, items)
+        if items == 0:
+            zero_volatility.append(curr_ticker)
+        else:
+            value_volatility.append(curr_ticker)
 
-print("Минимальная волатильность:")
-print(value_volatility[2][0] + ' - ' + str(round(value_volatility[2][1],2)) + ' %')
-print(value_volatility[1][0] + ' - ' + str(round(value_volatility[1][1],2)) + ' %')
-print(value_volatility[0][0] + ' - ' + str(round(value_volatility[0][1],2)) + ' %')
+    print("Максимальная волатильность:")
+    print(value_volatility[-1][0] + ' - ' + str(round(value_volatility[-1][1], 2)) + ' %')
+    print(value_volatility[-2][0] + ' - ' + str(round(value_volatility[-2][1], 2)) + ' %')
+    print(value_volatility[-3][0] + ' - ' + str(round(value_volatility[-3][1], 2)) + ' %')
 
-print("Нулевая волатильность:")
-for ticker in zero_volatility:
-    print(ticker[0], end=', ')
+    print("Минимальная волатильность:")
+    print(value_volatility[2][0] + ' - ' + str(round(value_volatility[2][1], 2)) + ' %')
+    print(value_volatility[1][0] + ' - ' + str(round(value_volatility[1][1], 2)) + ' %')
+    print(value_volatility[0][0] + ' - ' + str(round(value_volatility[0][1], 2)) + ' %')
+
+    print("Нулевая волатильность:")
+    for ticker in zero_volatility:
+        print(ticker[0], end=', ')
+    print(end='\n')
+
+
+if __name__ == '__main__':
+    main()
